@@ -1,0 +1,32 @@
+# /etc/network/interfaces — pve-01
+# Copie de référence. Passerelle corrigée : 192.168.1.254 (et non 192.168.1.1).
+# Après modification sur l'hôte : ifreload -a
+
+auto lo
+iface lo inet loopback
+
+iface nic0 inet manual
+
+iface nic1 inet manual
+
+auto vmbr0
+iface vmbr0 inet static
+        address 192.168.1.18/24
+        gateway 192.168.1.254
+        bridge-ports nic0
+        bridge-stp off
+        bridge-fd 0
+
+auto vmbr1
+iface vmbr1 inet manual
+        bridge-ports nic1
+        bridge-stp off
+        bridge-fd 0
+
+auto vmbr2
+iface vmbr2 inet manual
+        bridge-ports none
+        bridge-stp off
+        bridge-fd 0
+
+source /etc/network/interfaces.d/*

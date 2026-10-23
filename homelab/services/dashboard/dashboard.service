@@ -1,0 +1,20 @@
+[Unit]
+Description=Tableau de bord homelab (tablette)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=/etc/dashboard.env
+ExecStart=/usr/bin/python3 /opt/dashboard/dashboard.py
+Restart=on-failure
+DynamicUser=yes
+NoNewPrivileges=yes
+# ping a besoin de CAP_NET_RAW ; c'est la seule capacité accordée
+AmbientCapabilities=CAP_NET_RAW
+CapabilityBoundingSet=CAP_NET_RAW
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

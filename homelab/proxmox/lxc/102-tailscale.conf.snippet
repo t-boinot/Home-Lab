@@ -1,0 +1,4 @@
+# À ajouter à la fin de /etc/pve/lxc/102.conf (sur l'hôte), conteneur arrêté.
+# Donne au conteneur Tailscale l'accès au périphérique TUN.
+lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file

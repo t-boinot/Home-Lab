@@ -1,0 +1,16 @@
+# n8n — LXC 101 (docker)
+# Démarrage : cp .env.example .env && nano .env && docker compose up -d
+# Accès     : http://IP_DU_LXC_101:5678 (LAN ou Tailscale uniquement)
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest   # fixer une version (ex. :1.x.y) une fois stable
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    env_file: .env
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
